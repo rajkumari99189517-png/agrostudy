@@ -310,6 +310,98 @@ renderSubjects(subjects.filter(s=>(s[0]+" "+s[1]).toLowerCase().includes(q)));
 
 renderSubjects(subjects);
 
+const learningContent = {
+"Agronomy": {
+"Tillage and Tilth": {
+theory: "Tillage is the mechanical manipulation of soil to provide favourable conditions for crop growth. Tilth refers to the physical condition of soil in relation to plant growth.",
+hindi: "जुताई मिट्टी को फसल उत्पादन के अनुकूल बनाने की यांत्रिक प्रक्रिया है। टिल्थ मिट्टी की भौतिक अवस्था को दर्शाती है।",
+topics: ["Primary Tillage","Secondary Tillage","Minimum Tillage","Zero Tillage","Conventional Tillage"],
+questions: [
+{q:"Who is known as the father of tillage research?",o:["Jethro Tull","E.J. Russell","King","Liebig"],a:0,e:"Jethro Tull is widely associated with early scientific development of tillage and seed drilling."},
+{q:"Zero tillage is also known as:",o:["No-tillage","Deep tillage","Summer tillage","Contour tillage"],a:0,e:"Zero tillage involves crop establishment without conventional prior soil tillage."},
+{q:"The main objective of tillage is:",o:["Improve soil conditions","Increase soil salinity","Destroy all microorganisms","Increase erosion"],a:0,e:"Tillage aims to create suitable soil conditions for crop establishment and growth."}
+]
+},
+"Seed and Sowing": {
+theory: "Seed and sowing are fundamental components of crop establishment. Proper seed selection, seed rate, depth and spacing influence plant population and yield.",
+hindi: "बीज एवं बुवाई फसल स्थापना के महत्वपूर्ण आधार हैं। उचित बीज चयन, बीज दर, गहराई और दूरी फसल की पौध संख्या तथा उपज को प्रभावित करते हैं।",
+topics: ["Seed Quality","Seed Rate","Seed Treatment","Methods of Sowing","Depth of Sowing"],
+questions: [
+{q:"The process of placing seeds in soil is called:",o:["Sowing","Harvesting","Threshing","Winnowing"],a:0,e:"Sowing means placing seeds in the soil at an appropriate depth and spacing."},
+{q:"The main purpose of seed treatment is:",o:["Seed protection","Increase seed size","Change seed colour","Reduce germination"],a:0,e:"Seed treatment helps protect seeds and seedlings from seed-borne and soil-borne pests and diseases."}
+]
+}
+}
+};
+
+function showLearning(subject,chapter){
+const content=learningContent[subject]?.[chapter];
+if(!content){
+alert("Detailed content for this chapter will be added after syllabus verification.");
+return;
+}
+let old=document.getElementById("learningView");
+if(old)old.remove();
+
+const section=document.createElement("section");
+section.id="learningView";
+section.className="card";
+section.style.marginTop="20px";
+
+section.innerHTML=`
+<h2>${chapter}</h2>
+<h3>Complete Theory</h3>
+<p>${content.theory}</p>
+<h3>Hindi Notes</h3>
+<p>${content.hindi}</p>
+<h3>Important Topics</h3>
+<ul>${content.topics.map(t=>`<li>${t}</li>`).join("")}</ul>
+<h3>Practice MCQ</h3>
+<div id="mcqArea"></div>
+`;
+
+const area=section.querySelector("#mcqArea");
+content.questions.forEach((q,i)=>{
+const div=document.createElement("div");
+div.className="card";
+div.style.margin="12px 0";
+const question=document.createElement("p");
+question.textContent=(i+1)+". "+q.q;
+div.appendChild(question);
+q.o.forEach((option,j)=>{
+const label=document.createElement("label");
+label.style.display="block";
+label.style.margin="8px";
+const radio=document.createElement("input");
+radio.type="radio";
+radio.name="question"+i;
+radio.value=j;
+label.append(radio,document.createTextNode(" "+option));
+div.appendChild(label);
+});
+const button=document.createElement("button");
+button.className="btn";
+button.textContent="Check Answer";
+button.onclick=()=>{
+const selected=div.querySelector("input:checked");
+if(!selected){alert("Please select an answer");return;}
+const result=document.createElement("p");
+result.textContent=(Number(selected.value)===q.a?"Correct! ":"Incorrect. Correct answer: "+q.o[q.a]+". ")+q.e;
+result.style.color=Number(selected.value)===q.a?"green":"#b33";
+const previous=div.querySelector(".answer");
+if(previous)previous.remove();
+result.className="answer";
+div.appendChild(result);
+};
+div.appendChild(button);
+area.appendChild(div);
+});
+document.querySelector("main").appendChild(section);
+section.scrollIntoView({behavior:"smooth"});
+}
+row.innerHTML="<strong>Chapter "+(index+1)+"</strong><br>"+chapter;
+  row.style.cursor="pointer";
+row.onclick=()=>showLearning(name,chapter);
 </script>
 </body>
 </html>
