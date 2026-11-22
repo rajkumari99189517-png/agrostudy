@@ -4,43 +4,181 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Agrostudy - Agriculture Learning Portal</title>
+<title>Agrostudy | Complete Agriculture Portal</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial;background:#f3f8f1;color:#183b25}
-header{background:#176b37;color:white;padding:35px 15px;text-align:center}
-header h1{font-size:38px;margin:0}
-nav{background:#104d29;color:white;padding:15px;text-align:center}
-main{max-width:1100px;margin:30px auto;padding:15px}
-h2{color:#176b37}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:15px}
-.card{background:white;padding:22px;border-radius:12px;box-shadow:0 2px 10px #0001}
-footer{text-align:center;padding:25px;background:#104d29;color:white}
+body{margin:0;font-family:Arial,sans-serif;background:#f4f7f2;color:#193b27}
+header{background:#125c32;color:white;padding:24px 6%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.logo{font-size:27px;font-weight:bold}
+header p{margin:5px 0;font-size:13px}
+nav{background:#0b4528;padding:14px 6%;display:flex;gap:22px;flex-wrap:wrap}
+nav a{color:white;text-decoration:none;font-size:14px}
+.hero{padding:45px 6%;background:linear-gradient(120deg,#dcefdc,#f5f9e9)}
+.hero h1{font-size:32px;margin:0 0 12px}
+.hero p{line-height:1.6}
+.search{width:100%;max-width:550px;padding:14px;border:1px solid #ccc;border-radius:8px;margin-top:12px;font-size:15px}
+.container{max-width:1250px;margin:auto;padding:25px 5%}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px}
+.stat,.card{background:white;padding:19px;border-radius:12px;box-shadow:0 2px 9px #0000000c}
+.stat strong{display:block;font-size:22px;color:#168044;margin-bottom:5px}
+h2{margin:30px 0 17px;color:#155d32}
+.subjects{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.card{border:1px solid #e7eee6;transition:.2s}
+.card:hover{border-color:#21834a;transform:translateY(-2px)}
+.card h3{margin:0 0 9px;color:#176537;font-size:17px}
+.card p{font-size:13px;color:#66746a;line-height:1.5}
+.tag{display:inline-block;background:#e6f5e9;color:#176537;padding:5px 9px;border-radius:20px;font-size:11px}
+.btn{background:#176b39;color:white;border:0;padding:9px 13px;border-radius:6px;cursor:pointer;margin-top:7px}
+.tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+footer{background:#10472a;color:white;text-align:center;padding:25px;margin-top:35px}
+@media(max-width:600px){.hero h1{font-size:25px}header{padding:20px}}
 </style>
 </head>
 <body>
+
 <header>
-<h1>AGROSTUDY</h1>
+<div>
+<div class="logo">AGROSTUDY</div>
 <p>Complete Agriculture Learning & Examination Portal</p>
+</div>
+<div>Learn | Practice | Succeed</div>
 </header>
-<nav>Home | Subjects | Notes | Practice | Mock Tests</nav>
-<main>
-<h2>Explore Agriculture Subjects</h2>
-<div class="grid">
-<div class="card">Agronomy</div>
-<div class="card">Soil Science</div>
-<div class="card">Genetics & Plant Breeding</div>
-<div class="card">Horticulture</div>
-<div class="card">Plant Pathology</div>
-<div class="card">Agricultural Entomology</div>
-<div class="card">Agricultural Economics</div>
-<div class="card">Agricultural Extension</div>
-<div class="card">Seed Science</div>
-<div class="card">Plant Physiology</div>
-<div class="card">Agricultural Engineering</div>
-<div class="card">Animal Husbandry</div>
+
+<nav>
+<a href="#home">Home</a>
+<a href="#subjects">All Subjects</a>
+<a href="#library">Digital Library</a>
+<a href="#practice">Question Bank</a>
+<a href="#exams">Mock Tests</a>
+</nav>
+
+<section class="hero" id="home">
+<h1>One Platform for Complete Agriculture Education</h1>
+<p>B.Sc. Agriculture | M.Sc. Agriculture | ICAR | ASRB | AFO | State Agriculture Exams</p>
+<input class="search" id="search" placeholder="Search any Agriculture subject..." oninput="filterSubjects()">
+</section>
+
+<main class="container">
+
+<div class="stats">
+<div class="stat"><strong>All</strong>Agriculture Subjects</div>
+<div class="stat"><strong>Hindi + English</strong>Learning Language</div>
+<div class="stat"><strong>MCQ</strong>Practice System</div>
+<div class="stat"><strong>All Levels</strong>Basic to Advanced</div>
+</div>
+
+<h2 id="subjects">Explore All Agriculture Subjects</h2>
+<div class="subjects" id="subjectList"></div>
+
+<h2 id="library">Digital Agriculture Library</h2>
+<div class="tools">
+<div class="card"><h3>Study Notes</h3><p>Chapter-wise Agriculture notes.</p></div>
+<div class="card"><h3>Important Facts</h3><p>Scientists, discoveries, varieties and important years.</p></div>
+<div class="card"><h3>Tables & Diagrams</h3><p>Important classifications and visual learning material.</p></div>
+<div class="card"><h3>Reference Books</h3><p>Book-wise concepts and recommended reading.</p></div>
+</div>
+
+<h2 id="practice">Question Bank & Practice</h2>
+<div class="tools">
+<div class="card"><h3>Topic-wise MCQ</h3><p>Practice individual topics.</p></div>
+<div class="card"><h3>Chapter-wise Test</h3><p>Test your chapter preparation.</p></div>
+<div class="card"><h3>Advanced Questions</h3><p>Conceptual and research-level practice.</p></div>
+<div class="card"><h3>Previous Year Questions</h3><p>Exam-wise previous questions.</p></div>
+</div>
+
+<h2 id="exams">Competitive Exam Preparation</h2>
+<div class="tools">
+<div class="card"><h3>ICAR JRF / SRF</h3><p>Agriculture entrance preparation.</p></div>
+<div class="card"><h3>ASRB NET / ARS</h3><p>Subject-wise advanced preparation.</p></div>
+<div class="card"><h3>IBPS AFO</h3><p>Agriculture banking examination.</p></div>
+<div class="card"><h3>State Agriculture Exams</h3><p>AGTA, FSO, ADO, AAO and Supervisor.</p></div>
+<div class="card"><h3>UPSC Agriculture Optional</h3><p>Comprehensive agriculture preparation.</p></div>
+<div class="card"><h3>B.Sc. / M.Sc. Exams</h3><p>University semester preparation.</p></div>
 </div>
 </main>
-<footer>AGROSTUDY | Agriculture Knowledge For Everyone</footer>
+
+<footer>
+<strong>AGROSTUDY</strong>
+<p>Complete Agriculture Knowledge For Everyone</p>
+<p>Learn Agriculture | Build Knowledge | Achieve Success</p>
+</footer>
+
+<script>
+const subjects = [
+["Agronomy","Crop production, tillage, sowing, cropping systems"],
+["Soil Science","Soil chemistry, physics, fertility and classification"],
+["Soil Microbiology","Soil organisms, nutrient cycles and biofertilizers"],
+["Genetics","Mendelism, chromosomes and genetic principles"],
+["Plant Breeding","Selection, hybridization and crop improvement"],
+["Quantitative Genetics","Heritability, variability and genetic analysis"],
+["Molecular Biology","DNA, RNA, genes and molecular mechanisms"],
+["Plant Biotechnology","Tissue culture, genetic engineering and applications"],
+["Horticulture","Principles and practices of horticulture"],
+["Fruit Science","Fruit crops, varieties and production"],
+["Vegetable Science","Vegetable production and crop management"],
+["Floriculture","Flower crops, landscaping and nursery"],
+["Plant Pathology","Plant diseases, pathogens and disease management"],
+["Agricultural Entomology","Insects, pests, taxonomy and management"],
+["Nematology","Plant parasitic nematodes and management"],
+["Weed Science","Weed classification and weed management"],
+["Seed Science","Seed production, processing and certification"],
+["Plant Physiology","Plant growth, metabolism and development"],
+["Plant Biochemistry","Biomolecules, enzymes and metabolism"],
+["Agricultural Economics","Farm economics, markets and policies"],
+["Agricultural Extension","Extension education and rural development"],
+["Agricultural Statistics","Probability, sampling and statistical methods"],
+["Agricultural Engineering","Machinery, power and farm equipment"],
+["Irrigation Engineering","Irrigation methods and water management"],
+["Water Management","Watershed, drainage and water conservation"],
+["Animal Husbandry","Livestock production and management"],
+["Dairy Science","Milk production and dairy technology"],
+["Poultry Science","Poultry production and management"],
+["Fisheries","Aquaculture and fisheries management"],
+["Apiculture","Honeybee biology and beekeeping"],
+["Sericulture","Silkworm rearing and silk production"],
+["Mushroom Production","Mushroom cultivation and processing"],
+["Agroforestry","Trees, crops and integrated systems"],
+["Forestry","Forest management and silviculture"],
+["Agricultural Meteorology","Weather, climate and crop relations"],
+["Environmental Science","Environment, ecology and conservation"],
+["Organic Farming","Organic production and certification"],
+["Dryland Agriculture","Rainfed farming and drought management"],
+["Post Harvest Technology","Storage, processing and value addition"],
+["Food Science","Food quality, safety and preservation"],
+["Farm Management","Farm planning and resource management"],
+["Agribusiness Management","Agricultural business and entrepreneurship"],
+["Remote Sensing & GIS","Geospatial technology in agriculture"],
+["Precision Agriculture","Sensors, automation and smart farming"],
+["Research Methodology","Research design and scientific methods"],
+["Bioinformatics","Biological data and computational methods"],
+["Plant Anatomy","Internal structure of plants"],
+["Plant Morphology","External structure of plants"],
+["Plant Taxonomy","Classification and identification of plants"],
+["Climate Change","Climate impacts and agricultural adaptation"]
+];
+
+function renderSubjects(data){
+const list=document.getElementById("subjectList");
+list.innerHTML="";
+data.forEach(item=>{
+const card=document.createElement("div");
+card.className="card subject";
+const title=document.createElement("h3");
+title.textContent=item[0];
+const desc=document.createElement("p");
+desc.textContent=item[1];
+const tag=document.createElement("span");
+tag.className="tag";
+tag.textContent="Agriculture Subject";
+card.append(title,desc,tag);
+list.appendChild(card);
+});
+}
+function filterSubjects(){
+const q=document.getElementById("search").value.toLowerCase();
+renderSubjects(subjects.filter(s=>(s[0]+" "+s[1]).toLowerCase().includes(q)));
+}
+renderSubjects(subjects);
+</script>
 </body>
 </html>
