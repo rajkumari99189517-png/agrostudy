@@ -156,6 +156,85 @@ const subjects = [
 ["Plant Taxonomy","Classification and identification of plants"],
 ["Climate Change","Climate impacts and agricultural adaptation"]
 ];
+  
+const chapterData = {
+"Agronomy": [
+"Introduction and Scope of Agronomy",
+"Tillage and Tilth",
+"Seed and Sowing",
+"Plant Population and Crop Geometry",
+"Crop Nutrition and Nutrient Management",
+"Irrigation and Water Management",
+"Weed Management",
+"Cropping Systems",
+"Dryland Agriculture",
+"Sustainable Agriculture",
+"Organic Farming",
+"Farming Systems"
+],
+"Soil Science": [
+"Soil Formation and Pedology",
+"Physical Properties of Soil",
+"Soil Chemistry",
+"Soil Colloids",
+"Soil Organic Matter",
+"Soil Water",
+"Soil Air and Temperature",
+"Soil Fertility",
+"Soil Nutrient Management",
+"Soil Classification",
+"Problematic Soils",
+"Soil Conservation"
+],
+"Genetics": [
+"Introduction to Genetics",
+"Mendelian Genetics",
+"Chromosome Structure",
+"Cell Division",
+"Linkage and Crossing Over",
+"Mutation",
+"Quantitative Genetics",
+"Population Genetics",
+"Molecular Genetics",
+"Genetic Variation"
+],
+"Horticulture": [
+"Introduction to Horticulture",
+"Propagation Methods",
+"Nursery Management",
+"Planting Systems",
+"Training and Pruning",
+"Growth Regulators",
+"Fruit Production",
+"Vegetable Production",
+"Floriculture",
+"Post Harvest Management"
+],
+"Plant Pathology": [
+"Introduction to Plant Pathology",
+"History and Importance",
+"Fungi and Fungal Diseases",
+"Bacterial Diseases",
+"Viral Diseases",
+"Plant Disease Epidemiology",
+"Host Pathogen Interaction",
+"Disease Diagnosis",
+"Plant Disease Management",
+"Integrated Disease Management"
+],
+"Agricultural Entomology": [
+"Introduction to Entomology",
+"Insect Morphology",
+"Insect Anatomy",
+"Insect Physiology",
+"Insect Taxonomy",
+"Insect Ecology",
+"Stored Grain Pests",
+"Major Crop Pests",
+"Biological Control",
+"Integrated Pest Management"
+]
+};
 
 function renderSubjects(data){
 const list=document.getElementById("subjectList");
@@ -169,16 +248,68 @@ const desc=document.createElement("p");
 desc.textContent=item[1];
 const tag=document.createElement("span");
 tag.className="tag";
-tag.textContent="Agriculture Subject";
+tag.textContent="Explore Chapters →";
 card.append(title,desc,tag);
+card.style.cursor="pointer";
+card.addEventListener("click",()=>showChapters(item[0]));
 list.appendChild(card);
 });
 }
+
+function showChapters(name){
+const main=document.querySelector("main");
+let old=document.getElementById("chapterView");
+if(old)old.remove();
+
+const chapters=chapterData[name] || [
+"Introduction and Basic Principles",
+"Fundamental Concepts",
+"Classification and Terminology",
+"Structure and Functions",
+"Methods and Techniques",
+"Applications in Agriculture",
+"Management Practices",
+"Advanced Concepts and Recent Developments"
+];
+
+const section=document.createElement("section");
+section.id="chapterView";
+section.className="card";
+section.style.marginTop="25px";
+
+const heading=document.createElement("h2");
+heading.textContent=name+" – Chapters";
+section.appendChild(heading);
+
+const info=document.createElement("p");
+info.textContent="Select a chapter to explore its learning structure.";
+section.appendChild(info);
+
+chapters.forEach((chapter,index)=>{
+const row=document.createElement("div");
+row.className="card";
+row.style.margin="10px 0";
+row.innerHTML="<strong>Chapter "+(index+1)+"</strong><br>"+chapter;
+section.appendChild(row);
+});
+
+const back=document.createElement("button");
+back.className="btn";
+back.textContent="← Back to All Subjects";
+back.onclick=()=>section.remove();
+section.appendChild(back);
+
+main.appendChild(section);
+section.scrollIntoView({behavior:"smooth"});
+}
+
 function filterSubjects(){
 const q=document.getElementById("search").value.toLowerCase();
 renderSubjects(subjects.filter(s=>(s[0]+" "+s[1]).toLowerCase().includes(q)));
 }
+
 renderSubjects(subjects);
+
 </script>
 </body>
 </html>
